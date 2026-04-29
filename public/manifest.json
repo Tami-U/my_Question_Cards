@@ -1,0 +1,22 @@
+{
+  "name": "질문 카드 (Question Cards)",
+  "short_name": "질문 카드",
+  "description": "서로에 대해 더 깊이 알아가는 시간",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
