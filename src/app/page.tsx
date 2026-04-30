@@ -37,8 +37,8 @@ export default function Home() {
               할 말이 없을 때 열어봐
             </h1>
             <p className="text-slate-300 text-lg mb-12 leading-relaxed">
-              금요일을 위해 목요일날 친구들이랑 미리해보기<br />
-              질문카드랑 밸런스카드게임 리뷰 헤헿
+              수경님이랑 금욜날 하려고 만든<br />
+              질문 카드랑 밸런스 카드 헤헿
             </p>
 
             <div className="flex flex-col gap-4 w-full">
