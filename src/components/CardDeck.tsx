@@ -1,13 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Card from "./Card";
 import questionsData from "../data/questions.json";
+import { DeckType } from "@/app/page";
 
-export default function CardDeck() {
+interface CardDeckProps {
+  deckType: DeckType;
+}
+
+export default function CardDeck({ deckType }: CardDeckProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // 1 for right, -1 for left
+
+  // Reset index when deck type changes
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [deckType]);
+
+  const deck = questionsData[deckType];
 
   const handleDragEnd = (event: any, info: any) => {
     const swipeThreshold = 50;
@@ -19,14 +31,14 @@ export default function CardDeck() {
       }
     } else if (info.offset.x < -swipeThreshold) {
       // Swiped left -> Next card
-      if (currentIndex < questionsData.length) {
+      if (currentIndex < deck.length) {
         setDirection(1);
         setCurrentIndex(currentIndex + 1);
       }
     }
   };
 
-  if (currentIndex === questionsData.length) {
+  if (currentIndex === deck.length) {
     return (
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }} 
@@ -35,10 +47,10 @@ export default function CardDeck() {
       >
         <div className="text-6xl mb-6">🎉</div>
         <h2 className="text-2xl font-bold text-white mb-4">수경님 나랑 놀아줘서 고마워요!</h2>
-        <p className="text-white/60 mb-8 leading-relaxed">모든 질문 카드를 다 읽었습니다.<br/>오늘 즐거웠길 바라요!</p>
+        <p className="text-white/60 mb-8 leading-relaxed">모든 카드를 다 읽었습니다.<br/>오늘 즐거웠길 바라요!</p>
         <button 
           onClick={() => setCurrentIndex(0)}
-          className="py-3 px-8 bg-purple-500 hover:bg-purple-400 active:scale-95 text-white rounded-xl font-medium shadow-lg transition-all"
+          className={`py-3 px-8 ${deckType === "questions" ? "bg-purple-500 hover:bg-purple-400" : "bg-blue-500 hover:bg-blue-400"} active:scale-95 text-white rounded-xl font-medium shadow-lg transition-all`}
         >
           처음부터 다시하기
         </button>
@@ -46,7 +58,7 @@ export default function CardDeck() {
     );
   }
 
-  const currentQuestion = questionsData[currentIndex];
+  const currentQuestion = deck[currentIndex];
   if (!currentQuestion) return null;
 
   return (
@@ -69,6 +81,7 @@ export default function CardDeck() {
             question={currentQuestion.question}
             category={currentQuestion.category}
             hint={currentQuestion.hint}
+            isBalance={deckType === "balance"}
           />
         </motion.div>
       </AnimatePresence>
@@ -77,14 +90,14 @@ export default function CardDeck() {
       <div className="absolute -bottom-16 left-0 w-full flex flex-col items-center gap-2">
         <div className="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
           <motion.div 
-            className="h-full bg-gradient-to-r from-purple-400 to-indigo-500"
+            className={`h-full ${deckType === "questions" ? "bg-gradient-to-r from-purple-400 to-indigo-500" : "bg-gradient-to-r from-blue-400 to-cyan-500"}`}
             initial={{ width: 0 }}
-            animate={{ width: `${((currentIndex + 1) / questionsData.length) * 100}%` }}
+            animate={{ width: `${((currentIndex + 1) / deck.length) * 100}%` }}
             transition={{ duration: 0.3 }}
           />
         </div>
         <p className="text-white/60 text-sm font-light">
-          {currentIndex + 1} / {questionsData.length}
+          {currentIndex + 1} / {deck.length}
         </p>
       </div>
     </div>
