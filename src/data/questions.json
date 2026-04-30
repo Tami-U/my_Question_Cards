@@ -6,7 +6,7 @@
     { "id": 4, "category": "Daily", "question": "당신에게 '완벽한 하루'란 어떤 날인가요?", "hint": "내가 생각하는 최고의 휴식" },
     { "id": 5, "category": "Daily", "question": "마지막으로 혼자 노래를 부른 적은 언제인가요? 다른 사람에게 불러준 적은요?", "hint": "나만의 콘서트" },
     { "id": 6, "category": "Daily", "question": "오늘 본 영화중 가장 인상깊었던 장면은 무엇인가요?", "hint": "서로의 영화 취향 공유" },
-    { "id": 7, "category": "Value", "question": "자신이 어떻게 죽을 것 같은지에 대한 남모를 예감이 있나요?", "hint": "나의 무의식 속 두려움" },
+    { "id": 7, "category": "Fun", "question": "오늘 본 영화 등장인물들 중 가장 자신과 닮은 인물은 누구인가요?", "hint": "나와 캐릭터의 공통점" },
     { "id": 8, "category": "Friends", "question": "우리 처음 만났을때 첫인상은 어땠나요?", "hint": "서로의 첫 기억 소환하기" },
     { "id": 9, "category": "Value", "question": "당신의 인생에서 가장 감사하게 생각하는 것은 무엇인가요?", "hint": "소소한 혹은 커다란 행복" },
     { "id": 10, "category": "Personality", "question": "당신이 자라온 방식 중 하나를 바꿀 수 있다면 무엇을 바꾸고 싶나요?", "hint": "어린 시절의 아쉬움" },
