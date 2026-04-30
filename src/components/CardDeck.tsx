@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
 import Card from "./Card";
 import questionsData from "../data/questions.json";
 import { DeckType } from "@/app/page";
@@ -20,6 +21,16 @@ export default function CardDeck({ deckType }: CardDeckProps) {
   }, [deckType]);
 
   const deck = questionsData[deckType];
+
+  useEffect(() => {
+    if (currentIndex === deck.length) {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+  }, [currentIndex, deck.length]);
 
   const handleDragEnd = (event: any, info: any) => {
     const swipeThreshold = 50;
