@@ -37,7 +37,7 @@ export default function Home() {
               할 말이 없을 때 열어봐
             </h1>
             <p className="text-slate-300 text-lg mb-12 leading-relaxed">
-              수경님이랑 금욜날 하려고 만든<br />
+              친구랑 하려고 만든<br />
               질문 카드랑 밸런스 카드 헤헿
             </p>
 

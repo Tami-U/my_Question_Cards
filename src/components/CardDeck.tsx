@@ -57,7 +57,7 @@ export default function CardDeck({ deckType }: CardDeckProps) {
         className="flex flex-col items-center justify-center h-[60vh] max-w-sm mx-auto text-center z-10"
       >
         <div className="text-6xl mb-6">🎉</div>
-        <h2 className="text-2xl font-bold text-white mb-4">수경님 나랑 놀아줘서 고마워요!</h2>
+        <h2 className="text-2xl font-bold text-white mb-4">친구야 나랑 놀아줘서 고마워!</h2>
         <p className="text-white/60 mb-8 leading-relaxed">모든 카드를 다 읽었습니다.<br/>오늘 즐거웠길 바라요!</p>
         <button 
           onClick={() => setCurrentIndex(0)}
