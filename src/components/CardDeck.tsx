@@ -27,7 +27,7 @@ function shuffled(n: number): number[] {
 export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
   const cards = data[deckType];
   const isB = deckType === "balance";
-  const accent = isB ? "#5a6370" : "#b5482e";
+  const accent = isB ? "#5a6370" : "#9b5b46";
   const [order, setOrder] = useState<number[]>(() => Array.from({ length: cards.length }, (_, i) => i));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);

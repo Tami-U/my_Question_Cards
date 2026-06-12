@@ -89,7 +89,7 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
   const num = String(((seed - 1) % 99) + 1).padStart(2, "0");
 
   const palette = isBalance ? COOL : WARM;
-  const accent = isBalance ? "#5a6370" : "#b5482e";
+  const accent = isBalance ? "#5a6370" : "#9b5b46";
 
   return (
     <div

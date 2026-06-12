@@ -12,8 +12,8 @@ const config: Config = {
       colors: {
         cream: "#ece9e2",
         ink: "#34291f",
-        rust: "#b5482e",
-        coral: "#b5482e",
+        rust: "#9b5b46",
+        coral: "#9b5b46",
         olive: "#8b961a",
         smoke: "#5a6370",
       },

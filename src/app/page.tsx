@@ -30,7 +30,7 @@ function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
 }
 
 function Backdrop({ deck }: { deck: DeckType | null }) {
-  const accent = deck === "balance" ? "#5a6370" : "#b5482e";
+  const accent = deck === "balance" ? "#5a6370" : "#9b5b46";
   const deep = deck === "balance" ? "#243038" : "#5e2a1a";
   return (
     <>

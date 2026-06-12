@@ -6,10 +6,10 @@
   --cream: #ece9e2; /* warm paper off-white */
   --cream-2: #e4e0d6;
   --ink: #34291f; /* warm soft black (not pure, so it sits into the paper) */
-  --rust: #b5482e; /* terracotta accent */
+  --rust: #9b5b46; /* terracotta accent */
   --olive: #8b961a;
   --smoke: #5a6370;
-  --coral: #b5482e; /* alias kept for older refs */
+  --coral: #9b5b46; /* alias kept for older refs */
 }
 
 html,
