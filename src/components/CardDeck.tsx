@@ -32,6 +32,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isShuffling, setIsShuffling] = useState(false);
+  const [animating, setAnimating] = useState(false);
   const tr = t(lang);
 
   // Reset to natural order when deck type changes
@@ -47,6 +48,14 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
     const id = window.setTimeout(() => setIsShuffling(false), 720);
     return () => window.clearTimeout(id);
   }, [isShuffling]);
+
+  // lock dragging briefly while a card transition is in flight
+  // (prevents grabbing / stopping a mid-slide card)
+  useEffect(() => {
+    setAnimating(true);
+    const id = window.setTimeout(() => setAnimating(false), 600);
+    return () => window.clearTimeout(id);
+  }, [currentIndex]);
 
   const handleShuffle = () => {
     if (isShuffling) return;
@@ -166,7 +175,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
     <div className="w-full flex flex-col items-center">
       <div
         className="relative w-full h-[var(--ch)] mx-auto flex items-center justify-center"
-        style={{ ["--ch"]: "min(58svh, calc(100svh - 20rem), calc(80vw * 1.3333), 30rem)" } as React.CSSProperties}
+        style={{ ["--ch"]: "min(64svh, calc(100svh - 17rem), calc(90vw * 1.3333), 34rem)" } as React.CSSProperties}
       >
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
@@ -177,9 +186,9 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: direction * -180, scale: 0.94 }}
             transition={{ duration: 0.4, type: "spring", bounce: 0.18 }}
-            drag="x"
+            drag={animating ? false : "x"}
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.9}
+            dragElastic={0.6}
             onDragEnd={handleDragEnd}
           >
             <Card
