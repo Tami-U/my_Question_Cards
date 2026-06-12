@@ -3,35 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc; /* slate-50 */
-  --foreground: #0f172a; /* slate-900 */
-  --card: rgba(255, 255, 255, 0.7);
+  --cream: #ece9e2; /* warm paper off-white */
+  --cream-2: #e4e0d6;
+  --ink: #34291f; /* warm soft black (not pure, so it sits into the paper) */
+  --rust: #b5482e; /* terracotta accent */
+  --olive: #8b961a;
+  --smoke: #5a6370;
+  --coral: #b5482e; /* alias kept for older refs */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f172a; /* slate-900 */
-    --foreground: #f8fafc; /* slate-50 */
-    --card: rgba(30, 41, 59, 0.7); /* slate-800 with opacity */
-  }
-}
-
+html,
 body {
-  color: var(--foreground);
-  background: var(--background);
-  /* Mobile optimization */
+  color: var(--ink);
+  background: var(--cream);
   overscroll-behavior-y: none;
   touch-action: pan-y;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Glassmorphism utilities */
-.glass {
-  background: var(--card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .app-container {
@@ -42,4 +30,69 @@ body {
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
+}
+
+/* ---------- Fonts ---------- */
+/* quiet outlined button */
+.btn-quiet {
+  border: 1.5px solid var(--ink);
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
+}
+.btn-quiet:hover {
+  transform: translateY(-2px);
+}
+.btn-quiet:active {
+  transform: translateY(0);
+}
+
+/* ---------- Material / editorial direction (card preview) ---------- */
+.font-serif {
+  font-family: var(--font-serif), "Helvetica Neue", Arial, sans-serif;
+}
+.font-serif-kr {
+  font-family: var(--font-serif-kr), var(--font-serif), sans-serif;
+}
+/* CJK mincho for the 間 mark — system serif stack renders the glyph elegantly */
+.font-jp {
+  font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Batang", "Noto Serif KR",
+    "Noto Serif JP", serif;
+  font-weight: 600;
+}
+
+/* frosted acrylic pane that diffuses the colour fields beneath it */
+.frost-pane {
+  background: rgba(245, 243, 238, 0.5);
+  backdrop-filter: blur(13px) saturate(1.05);
+  -webkit-backdrop-filter: blur(13px) saturate(1.05);
+}
+
+/* very slow drift for the floating colour fields */
+.float-slow {
+  animation: floatSlow 9s ease-in-out infinite;
+}
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translate(0, -8px) rotate(calc(var(--rot, 0deg) + 1.5deg));
+  }
+}
+
+/* subtle grain for material/paper feel */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* accessibility — respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

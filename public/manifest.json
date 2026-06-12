@@ -1,22 +1,17 @@
 {
-  "name": "질문 카드 (Question Cards)",
-  "short_name": "질문 카드",
-  "description": "서로에 대해 더 깊이 알아가는 시간",
+  "name": "間 Aida — Question & Balance",
+  "short_name": "Aida",
+  "description": "사이, 그리고 서로의 간격. 마주 앉은 두 사람을 위한 질문 카드 & 밸런스 카드.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#ece9e2",
+  "theme_color": "#ece9e2",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
     }
   ]
 }

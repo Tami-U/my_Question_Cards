@@ -2,69 +2,181 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { sound } from "@/lib/sound";
 
 interface CardProps {
   question: string;
   category: string;
   hint: string;
+  tapLabel: string;
+  seed: number;
   isBalance?: boolean;
 }
 
-export default function Card({ question, category, hint, isBalance = false }: CardProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
+/* per-deck colour fields — Question runs warm (terracotta), Balance runs cool (smoke).
+   [primary, secondary, dark, soft] */
+const WARM = [
+  "rgba(178, 66, 40, 0.74)", // terracotta
+  "rgba(150, 166, 26, 0.55)", // olive
+  "rgba(38, 36, 32, 0.78)", // char
+  "rgba(201, 128, 99, 0.5)", // clay
+];
+const COOL = [
+  "rgba(82, 99, 112, 0.72)", // smoke blue
+  "rgba(120, 150, 150, 0.5)", // cool sage
+  "rgba(38, 36, 32, 0.78)", // char
+  "rgba(95, 115, 140, 0.5)", // slate
+];
 
-  // Pick a deterministic emoji based on the question length
-  const emojis = ["👻", "✨", "🐱", "💕", "💭", "🎲", "🦄", "🎈", "🌟", "🦦", "🐣", "🍀", "🎀", "🎉", "🔥", "🌈", "🍭"];
-  const emoji = emojis[question.length % emojis.length];
+type Shape = { ci: number; top: number; left: number; w: number; h: number; rot: number; round?: boolean };
+
+const COMPOSITIONS: Shape[][] = [
+  [
+    { ci: 1, top: 18, left: -6, w: 62, h: 34, rot: -3 },
+    { ci: 2, top: 40, left: 30, w: 26, h: 52, rot: 11 },
+    { ci: 0, top: 66, left: 8, w: 40, h: 26, rot: -6, round: true },
+  ],
+  [
+    { ci: 3, top: 12, left: 20, w: 58, h: 22, rot: 2 },
+    { ci: 0, top: 30, left: 14, w: 50, h: 44, rot: -2 },
+    { ci: 2, top: 62, left: 38, w: 44, h: 34, rot: 24 },
+  ],
+  [
+    { ci: 0, top: 16, left: 8, w: 48, h: 30, rot: -8 },
+    { ci: 1, top: 34, left: 36, w: 38, h: 40, rot: 6 },
+    { ci: 2, top: 58, left: 6, w: 30, h: 38, rot: -14 },
+  ],
+  [
+    { ci: 0, top: 20, left: 24, w: 44, h: 50, rot: 4 },
+    { ci: 2, top: 48, left: -4, w: 40, h: 30, rot: -10, round: true },
+    { ci: 3, top: 60, left: 44, w: 28, h: 34, rot: 18 },
+  ],
+];
+
+function Material({ seed, palette, dim = false }: { seed: number; palette: string[]; dim?: boolean }) {
+  const comp = COMPOSITIONS[((seed % COMPOSITIONS.length) + COMPOSITIONS.length) % COMPOSITIONS.length];
+  return (
+    <div className="absolute inset-0 overflow-hidden" aria-hidden>
+      <div className={`absolute inset-0 ${dim ? "opacity-45" : "opacity-100"}`}>
+        {comp.map((s, i) => (
+          <div
+            key={i}
+            className="absolute float-slow mix-blend-multiply"
+            style={
+              {
+                top: `${s.top}%`,
+                left: `${s.left}%`,
+                width: `${s.w}%`,
+                height: `${s.h}%`,
+                background: palette[s.ci],
+                borderRadius: s.round ? "9999px" : "2px",
+                ["--rot" as string]: `${s.rot}deg`,
+                transform: `rotate(${s.rot}deg)`,
+                animationDelay: `${i * 1.3}s`,
+              } as React.CSSProperties
+            }
+          />
+        ))}
+      </div>
+      <div className={`frost-pane absolute inset-0 ${dim ? "opacity-90" : "opacity-75"}`} />
+      <div className="grain absolute inset-0 opacity-30" />
+    </div>
+  );
+}
+
+export default function Card({ question, category, hint, tapLabel, seed, isBalance = false }: CardProps) {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const num = String(((seed - 1) % 99) + 1).padStart(2, "0");
+
+  const palette = isBalance ? COOL : WARM;
+  const accent = isBalance ? "#5a6370" : "#b5482e";
 
   return (
     <div
-      className="relative w-full aspect-[3/4] max-w-sm mx-auto cursor-pointer [perspective:1000px]"
-      onClick={() => setIsFlipped(!isFlipped)}
+      className="relative w-full aspect-[3/4] max-w-sm mx-auto cursor-pointer [perspective:1500px] outline-none focus-visible:ring-2 focus-visible:ring-ink/30 rounded-[22px]"
+      role="button"
+      tabIndex={0}
+      aria-label={isFlipped ? "show cover / 앞면 보기" : "flip card / 카드 뒤집기"}
+      onClick={() => {
+        sound.playFlip();
+        setIsFlipped(!isFlipped);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          sound.playFlip();
+          setIsFlipped((f) => !f);
+        }
+      }}
     >
       <motion.div
         className="w-full h-full relative"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
+        transition={{ duration: 0.65, type: "spring", stiffness: 210, damping: 25 }}
         style={{ transformStyle: "preserve-3d" }}
       >
-        {/* Cover of Card (What you see first) */}
-        <div 
-          className={`absolute w-full h-full [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col items-center justify-center p-3 rounded-3xl ${isBalance ? "bg-blue-300 border-blue-400" : "bg-purple-300 border-purple-400"} shadow-2xl border transition-opacity duration-300`}
-          style={{ opacity: isFlipped ? 0 : 1 }}
+        {/* ---------- COVER (material object) ---------- */}
+        <div
+          className="absolute w-full h-full [backface-visibility:hidden] [-webkit-backface-visibility:hidden] rounded-[22px] overflow-hidden bg-[#efece5] border border-[#d8d3c9] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)]"
+          style={{ opacity: isFlipped ? 0 : 1, transition: "opacity 0.3s" }}
         >
-          <div className={`w-full h-full rounded-2xl ${isBalance ? "bg-[repeating-linear-gradient(-45deg,#93c5fd,#93c5fd_12px,#60a5fa_12px,#60a5fa_24px)] border-blue-400" : "bg-[repeating-linear-gradient(45deg,#d8b4fe,#d8b4fe_12px,#c084fc_12px,#c084fc_24px)] border-purple-400"} border-2 flex flex-col items-center justify-center relative overflow-hidden shadow-inner`}>
-            <div className={`absolute w-20 h-20 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg border ${isBalance ? "border-blue-300" : "border-purple-300"} z-10`}>
-              <span className={`${isBalance ? "text-blue-500" : "text-purple-500"} font-bold tracking-widest text-sm`}>TAP</span>
+          <Material seed={seed} palette={palette} />
+
+          {/* door-hanger ring nod, tinted by deck */}
+          <div
+            className="absolute top-8 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border"
+            style={{ borderColor: accent, opacity: 0.3 }}
+          />
+
+          {/* labels */}
+          <div className="absolute inset-0 p-7 flex flex-col">
+            <div className="flex items-start justify-between">
+              <span className="font-serif text-[11px] tracking-[0.28em] uppercase text-[#34291f]/70">
+                {category}
+              </span>
+              <span className="font-serif text-[11px] tracking-[0.22em] font-medium" style={{ color: accent }}>
+                {isBalance ? "BALANCE" : "QUESTION"}
+              </span>
             </div>
-            {/* Subtle glow effect */}
-            <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-white/30 rounded-full blur-3xl" />
-            <div className={`absolute -top-20 -left-20 w-40 h-40 ${isBalance ? "bg-blue-100/40" : "bg-purple-100/40"} rounded-full blur-3xl`} />
+
+            <span
+              className="mt-auto font-serif text-[64px] leading-none self-start"
+              style={{ color: accent, opacity: 0.42 }}
+            >
+              {num}
+            </span>
+            <span className="mt-3 font-serif-kr text-[11px] tracking-[0.18em] text-[#34291f]/55">
+              {tapLabel}
+            </span>
           </div>
         </div>
 
-        {/* Question Side (What you read) */}
+        {/* ---------- QUESTION SIDE ---------- */}
         <div
-          className="absolute w-full h-full [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col items-center justify-start p-8 rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl overflow-hidden"
+          className="absolute w-full h-full [backface-visibility:hidden] [-webkit-backface-visibility:hidden] rounded-[22px] overflow-hidden bg-[#f3f0ea] border border-[#d8d3c9] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)]"
           style={{ transform: "rotateY(180deg)" }}
         >
-          <div className={`absolute top-0 left-0 w-full h-1 ${isBalance ? "bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-400" : "bg-gradient-to-r from-pink-500 via-purple-500 to-blue-400"}`} />
-          
-          <span className="px-4 py-1.5 rounded-full bg-slate-100 text-slate-600 text-sm font-bold tracking-wider mt-2 mb-6 uppercase border border-slate-200">
-            {category}
-          </span>
+          <Material seed={seed} palette={palette} dim />
 
-          {/* Cute varied illustration */}
-          <div className="text-5xl mb-6 drop-shadow-sm animate-bounce" style={{ animationDuration: "2s" }}>{emoji}</div>
-          
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 text-center leading-relaxed break-keep">
-            {question}
-          </h2>
-          
-          <div className="mt-auto pt-6 w-full border-t border-slate-100">
-            <p className="text-center text-slate-500 text-base font-medium">
-              💡 {hint}
-            </p>
+          <div className="absolute inset-0 p-8 flex flex-col">
+            <div className="flex items-center justify-between">
+              <span className="font-serif text-[11px] tracking-[0.28em] uppercase text-[#34291f]/55">
+                {category}
+              </span>
+              <span className="font-serif text-[10px] tracking-[0.2em] uppercase" style={{ color: accent }}>
+                {isBalance ? "Balance" : "Question"} · {num}
+              </span>
+            </div>
+
+            <div className="flex-1 flex items-center">
+              <h2 className="font-serif-kr text-[1.5rem] leading-[1.7] text-[#34291f] break-keep">{question}</h2>
+            </div>
+
+            <div className="pt-4 border-t border-[#34291f]/15">
+              <p className="font-serif-kr text-[13px]" style={{ color: accent }}>
+                {hint}
+              </p>
+            </div>
           </div>
         </div>
       </motion.div>
