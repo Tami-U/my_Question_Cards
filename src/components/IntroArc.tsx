@@ -1,7 +1,7 @@
 "use client";
 
-/* Thin circular arc with two rust dots, gently orbiting behind the intro hero.
-   Line + single accent only — adds quiet motion without clutter. */
+/* Open (partial) arc with two fixed rust dots behind the intro hero.
+   Static line + single accent — quiet, no motion, minimal distraction. */
 
 export default function IntroArc() {
   return (
@@ -9,11 +9,17 @@ export default function IntroArc() {
       <svg
         viewBox="0 0 400 400"
         fill="none"
-        className="w-[min(94vw,80vh)] h-[min(94vw,80vh)] max-w-none animate-[spin_80s_linear_infinite]"
+        className="w-[min(94vw,80vh)] h-[min(94vw,80vh)] max-w-none"
       >
-        <circle cx="200" cy="200" r="190" stroke="#34291f" strokeOpacity="0.15" strokeWidth="0.7" />
-        <circle cx="200" cy="10" r="5.5" fill="#b5482e" />
-        <circle cx="387" cy="233" r="4.5" fill="#b5482e" />
+        {/* open arc — sweeps the long way (left/bottom), leaving the top-right open */}
+        <path
+          d="M 200 10 A 190 190 0 1 0 387 233"
+          stroke="#34291f"
+          strokeOpacity="0.15"
+          strokeWidth="0.7"
+          strokeLinecap="round"
+        />
+        <circle cx="200" cy="10" r="5" fill="#b5482e" />
       </svg>
     </div>
   );
