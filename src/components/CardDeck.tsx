@@ -164,7 +164,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="relative w-full h-[58vh] max-w-sm mx-auto flex items-center justify-center">
+      <div className="relative w-full h-[min(58svh,calc(100svh_-_20rem))] max-w-sm mx-auto flex items-center justify-center">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={`${order.join("-")}-${currentIndex}`}
@@ -203,7 +203,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
               {[0, 1, 2, 3, 4].map((i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-full max-w-sm aspect-[3/4] rounded-[22px] border border-[#d8d3c9] bg-[#efece5] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)] overflow-hidden"
+                  className="absolute w-full max-w-sm max-h-[min(58svh,calc(100svh_-_20rem))] aspect-[3/4] rounded-[22px] border border-[#d8d3c9] bg-[#efece5] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)] overflow-hidden"
                   initial={{ x: 0, y: 0, rotate: 0 }}
                   animate={{
                     x: [0, (i - 2) * 58, 0],
@@ -221,7 +221,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
       </div>
 
       {/* progress */}
-      <div className="w-full max-w-sm mx-auto mt-7 flex flex-col items-center gap-2.5">
+      <div className="w-full max-w-sm mx-auto mt-6 flex flex-col items-center gap-2.5">
         <div className="w-full h-px bg-ink/15 overflow-hidden">
           <motion.div
             className={`h-full ${isB ? "bg-smoke" : "bg-rust"}`}
@@ -249,7 +249,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
       <button
         onClick={handleShuffle}
         disabled={isShuffling}
-        className={`mt-9 font-serif text-xl tracking-[0.32em] uppercase transition-colors disabled:opacity-50 ${
+        className={`mt-7 font-serif text-xl tracking-[0.32em] uppercase transition-colors disabled:opacity-50 ${
           isShuffling ? "text-ink/40" : isB ? "text-ink/80 hover:text-smoke" : "text-ink/80 hover:text-rust"
         }`}
         aria-label="shuffle"

@@ -187,6 +187,21 @@ class SoundEngine {
     this.tone(0.05, SCALE[4], 0.85, 0.09); // E
   }
 
+  // gentle "close" when going back — the open fifth, descending
+  playBack() {
+    if (!this.sfxOn || !this.ctx) return;
+    this.resume();
+    this.tone(0, SCALE[4], 0.7, 0.12); // E
+    this.tone(0.05, SCALE[1], 0.7, 0.09); // A
+  }
+
+  // short soft tick for toggles (language)
+  playToggle() {
+    if (!this.sfxOn || !this.ctx) return;
+    this.resume();
+    this.tone(0, SCALE[3], 0.32, 0.1);
+  }
+
   // ---------- ambient helpers ----------
   private startBed(type: BiquadFilterType, freq: number, Q: number, gain: number) {
     const ctx = this.ctx!;

@@ -93,7 +93,7 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
 
   return (
     <div
-      className="relative w-full aspect-[3/4] max-w-sm mx-auto cursor-pointer [perspective:1500px] outline-none focus-visible:ring-2 focus-visible:ring-ink/30 rounded-[22px]"
+      className="relative w-full aspect-[3/4] max-w-sm max-h-[min(58svh,calc(100svh_-_20rem))] mx-auto cursor-pointer [perspective:1500px] outline-none focus-visible:ring-2 focus-visible:ring-ink/30 rounded-[22px]"
       role="button"
       tabIndex={0}
       aria-label={isFlipped ? "show cover / 앞면 보기" : "flip card / 카드 뒤집기"}
@@ -118,7 +118,12 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
         {/* ---------- COVER (material object) ---------- */}
         <div
           className="absolute w-full h-full [backface-visibility:hidden] [-webkit-backface-visibility:hidden] rounded-[22px] overflow-hidden bg-[#efece5] border border-[#d8d3c9] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)]"
-          style={{ opacity: isFlipped ? 0 : 1, transition: "opacity 0.3s" }}
+          style={{
+            opacity: isFlipped ? 0 : 1,
+            transition: "opacity 0.3s",
+            clipPath: "inset(0 round 22px)",
+            WebkitClipPath: "inset(0 round 22px)",
+          }}
         >
           <Material seed={seed} palette={palette} />
 
@@ -154,7 +159,11 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
         {/* ---------- QUESTION SIDE ---------- */}
         <div
           className="absolute w-full h-full [backface-visibility:hidden] [-webkit-backface-visibility:hidden] rounded-[22px] overflow-hidden bg-[#f3f0ea] border border-[#d8d3c9] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)]"
-          style={{ transform: "rotateY(180deg)" }}
+          style={{
+            transform: "rotateY(180deg)",
+            clipPath: "inset(0 round 22px)",
+            WebkitClipPath: "inset(0 round 22px)",
+          }}
         >
           <Material seed={seed} palette={palette} dim />
 

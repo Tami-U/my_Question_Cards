@@ -14,7 +14,10 @@ function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
         <span key={l} className="flex items-center gap-1.5">
           {i > 0 && <span className="text-ink/25">/</span>}
           <button
-            onClick={() => setLang(l)}
+            onClick={() => {
+              sound.playToggle();
+              setLang(l);
+            }}
             className={`transition-colors ${lang === l ? "text-rust" : "text-ink/40 hover:text-ink"}`}
           >
             {l === "ko" ? "KR" : "EN"}
@@ -63,7 +66,10 @@ export default function Home() {
       <header className="relative z-30 flex items-center justify-between px-6 sm:px-9 py-5">
         {deckType ? (
           <button
-            onClick={() => setDeckType(null)}
+            onClick={() => {
+              sound.playBack();
+              setDeckType(null);
+            }}
             className="group flex items-center gap-2 font-serif text-sm tracking-[0.18em] uppercase text-ink/70 hover:text-ink transition-colors"
           >
             <span className="text-base leading-none group-hover:-translate-x-1 transition-transform">&larr;</span>
@@ -140,7 +146,7 @@ export default function Home() {
               transition={{ duration: 0.45 }}
               className="w-full flex flex-col items-center"
             >
-              <div className="flex flex-col items-center text-center mb-8">
+              <div className="flex flex-col items-center text-center mb-6">
                 <span className={`w-1.5 h-1.5 rounded-full mb-3 ${deckType === "balance" ? "bg-smoke" : "bg-rust"}`} />
                 <span
                   className={`font-serif text-[11px] tracking-[0.3em] uppercase ${
@@ -154,7 +160,14 @@ export default function Home() {
                 </h1>
               </div>
 
-              <CardDeck deckType={deckType} lang={lang} onBack={() => setDeckType(null)} />
+              <CardDeck
+                deckType={deckType}
+                lang={lang}
+                onBack={() => {
+                  sound.playBack();
+                  setDeckType(null);
+                }}
+              />
             </motion.div>
           )}
         </AnimatePresence>
