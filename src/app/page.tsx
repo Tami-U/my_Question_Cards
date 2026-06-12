@@ -149,15 +149,7 @@ export default function Home() {
               className="w-full flex flex-col items-center"
             >
               <div className="flex flex-col items-center text-center mb-6">
-                <span className={`w-1.5 h-1.5 rounded-full mb-3 ${deckType === "balance" ? "bg-smoke" : "bg-rust"}`} />
-                <span
-                  className={`font-serif text-[11px] tracking-[0.3em] uppercase ${
-                    deckType === "balance" ? "text-smoke" : "text-rust"
-                  }`}
-                >
-                  {deckType === "questions" ? "Question" : "Balance"}
-                </span>
-                <h1 className="font-serif-kr text-2xl tracking-tight mt-1">
+                <h1 className="font-serif-kr text-2xl tracking-tight">
                   {deckType === "questions" ? tr.questionsTitle : tr.balanceTitle}
                 </h1>
               </div>
