@@ -143,7 +143,8 @@ export default function Home() {
               key="deck"
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.45 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.4 }}
               className="w-full flex flex-col items-center"
             >
               <div className="flex flex-col items-center text-center mb-6">
