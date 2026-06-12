@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import CardDeck from "@/components/CardDeck";
 import SoundControl from "@/components/SoundControl";
 import { sound } from "@/lib/sound";
@@ -87,8 +87,7 @@ export default function Home() {
       </header>
 
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pb-8">
-        <AnimatePresence mode="wait">
-          {!deckType ? (
+        {!deckType ? (
             <motion.div
               key="intro"
               initial={{ opacity: 0, y: 14 }}
@@ -171,7 +170,6 @@ export default function Home() {
               />
             </motion.div>
           )}
-        </AnimatePresence>
 
         {!deckType && (
           <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center font-mono text-[11px] tracking-[0.12em] text-ink/45 whitespace-nowrap">
