@@ -52,11 +52,11 @@ body {
 .font-serif-kr {
   font-family: var(--font-serif-kr), var(--font-serif), sans-serif;
 }
-/* CJK mincho for the 間 mark — distinctive old-style mincho, system fallback */
+/* CJK mincho for the 間 mark — system serif stack renders the glyph elegantly */
 .font-jp {
-  font-family: "Zen Old Mincho", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Batang",
-    "Noto Serif KR", "Noto Serif JP", serif;
-  font-weight: 500;
+  font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Batang", "Noto Serif KR",
+    "Noto Serif JP", serif;
+  font-weight: 600;
 }
 
 /* frosted acrylic pane that diffuses the colour fields beneath it */
