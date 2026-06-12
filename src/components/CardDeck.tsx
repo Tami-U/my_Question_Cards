@@ -175,32 +175,28 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
     <div className="w-full flex flex-col items-center">
       <div
         className="relative w-full h-[var(--ch)] mx-auto flex items-center justify-center"
-        style={{ ["--ch"]: "min(64svh, calc(100svh - 17rem), calc(90vw * 1.3333), 34rem)" } as React.CSSProperties}
+        style={{ ["--ch"]: "min(calc(100svh - 20rem), calc(88vw * 1.3333), 34rem)" } as React.CSSProperties}
       >
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={`${order.join("-")}-${currentIndex}`}
-            custom={direction}
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ opacity: 0, x: direction * 180, scale: 0.94 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: direction * -180, scale: 0.94 }}
-            transition={{ duration: 0.4, type: "spring", bounce: 0.18 }}
-            drag={animating ? false : "x"}
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.6}
-            onDragEnd={handleDragEnd}
-          >
-            <Card
-              question={content.question}
-              category={card.category}
-              hint={content.hint}
-              tapLabel={tr.tap}
-              seed={card.id}
-              isBalance={deckType === "balance"}
-            />
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key={`${order.join("-")}-${currentIndex}`}
+          className="absolute inset-0 flex items-center justify-center"
+          initial={{ opacity: 0, x: direction * 110, scale: 0.96 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.32, ease: "easeOut" }}
+          drag={animating ? false : "x"}
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.6}
+          onDragEnd={handleDragEnd}
+        >
+          <Card
+            question={content.question}
+            category={card.category}
+            hint={content.hint}
+            tapLabel={tr.tap}
+            seed={card.id}
+            isBalance={deckType === "balance"}
+          />
+        </motion.div>
 
         {/* ---------- shuffle riffle overlay ---------- */}
         <AnimatePresence>
