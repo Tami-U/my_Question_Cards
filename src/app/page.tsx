@@ -122,7 +122,7 @@ export default function Home() {
                     sound.playEnter();
                     setDeckType("questions");
                   }}
-                  className="group flex items-center justify-center gap-3 py-4 px-6 rounded-full font-serif text-sm tracking-[0.2em] uppercase bg-[#fffaf8] border border-ink/15 text-ink shadow-[0_16px_38px_-22px_rgba(52,41,31,0.5)] hover:bg-rust hover:text-cream hover:border-rust active:scale-[0.98] transition-all duration-200"
+                  className="group flex items-center justify-center gap-3 py-4 px-6 rounded-full font-serif text-sm tracking-[0.2em] uppercase bg-[#f4f0e8] border border-ink/15 text-ink hover:bg-rust hover:text-cream hover:border-rust active:scale-[0.98] transition-all duration-200"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-rust group-hover:bg-cream transition-colors" />
                   {tr.questionsBtn}
@@ -132,7 +132,7 @@ export default function Home() {
                     sound.playEnter();
                     setDeckType("balance");
                   }}
-                  className="group flex items-center justify-center gap-3 py-4 px-6 rounded-full font-serif text-sm tracking-[0.2em] uppercase bg-[#fffaf8] border border-ink/15 text-ink shadow-[0_16px_38px_-22px_rgba(52,41,31,0.5)] hover:bg-smoke hover:text-cream hover:border-smoke active:scale-[0.98] transition-all duration-200"
+                  className="group flex items-center justify-center gap-3 py-4 px-6 rounded-full font-serif text-sm tracking-[0.2em] uppercase bg-[#f4f0e8] border border-ink/15 text-ink hover:bg-smoke hover:text-cream hover:border-smoke active:scale-[0.98] transition-all duration-200"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-smoke group-hover:bg-cream transition-colors" />
                   {tr.balanceBtn}

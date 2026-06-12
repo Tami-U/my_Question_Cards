@@ -135,7 +135,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
           <div className="flex flex-col gap-3 w-full max-w-xs">
             <button
               onClick={handleShuffle}
-              className={`btn-quiet w-full py-4 px-6 font-serif text-sm tracking-[0.2em] uppercase bg-transparent text-ink border-ink hover:text-cream ${
+              className={`w-full py-4 px-6 rounded-full font-serif text-sm tracking-[0.2em] uppercase bg-[#f4f0e8] border border-ink/15 text-ink active:scale-[0.98] transition-all duration-200 hover:text-cream ${
                 isB ? "hover:bg-smoke hover:border-smoke" : "hover:bg-rust hover:border-rust"
               }`}
             >
@@ -143,7 +143,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
             </button>
             <button
               onClick={onBack}
-              className="btn-quiet w-full py-4 px-6 font-serif text-sm tracking-[0.2em] uppercase bg-transparent text-ink border-ink hover:bg-ink hover:text-cream"
+              className="w-full py-4 px-6 rounded-full font-serif text-sm tracking-[0.2em] uppercase bg-[#f4f0e8] border border-ink/15 text-ink active:scale-[0.98] transition-all duration-200 hover:bg-ink hover:text-cream"
             >
               {tr.back}
             </button>
