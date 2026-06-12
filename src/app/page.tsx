@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import CardDeck from "@/components/CardDeck";
 import SoundControl from "@/components/SoundControl";
+import IntroArc from "@/components/IntroArc";
 import { sound } from "@/lib/sound";
 import { Lang, DeckType, t } from "@/lib/i18n";
 
@@ -61,6 +62,7 @@ export default function Home() {
   return (
     <main className="relative min-h-[100svh] flex flex-col bg-[var(--cream)] text-ink overflow-hidden">
       <Backdrop deck={deckType} />
+      {!deckType && <IntroArc />}
 
       {/* context-aware header */}
       <header className="relative z-30 flex items-center justify-between px-6 sm:px-9 py-5">
