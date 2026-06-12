@@ -72,7 +72,7 @@ export default function Home() {
               sound.playBack();
               setDeckType(null);
             }}
-            className="group flex items-center gap-2 font-serif text-sm tracking-[0.18em] uppercase text-ink/70 hover:text-ink transition-colors"
+            className="group flex items-center gap-2 font-serif text-[11px] tracking-[0.18em] uppercase text-ink/50 hover:text-ink transition-colors"
           >
             <span className="text-base leading-none group-hover:-translate-x-1 transition-transform">&larr;</span>
             {tr.back}

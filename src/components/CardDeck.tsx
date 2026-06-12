@@ -257,8 +257,8 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
       <button
         onClick={handleShuffle}
         disabled={isShuffling}
-        className={`mt-7 font-serif text-sm tracking-[0.3em] uppercase transition-colors disabled:opacity-50 ${
-          isShuffling ? "text-ink/40" : isB ? "text-ink/80 hover:text-smoke" : "text-ink/80 hover:text-rust"
+        className={`mt-7 font-serif text-xs tracking-[0.26em] uppercase transition-colors disabled:opacity-50 ${
+          isShuffling ? "text-ink/30" : isB ? "text-ink/40 hover:text-smoke" : "text-ink/40 hover:text-rust"
         }`}
         aria-label="shuffle"
       >

@@ -78,7 +78,7 @@ function Material({ seed, palette, dim = false }: { seed: number; palette: strin
           />
         ))}
       </div>
-      <div className={`frost-pane absolute inset-0 ${dim ? "opacity-90" : "opacity-75"}`} />
+      <div className={`frost-pane absolute inset-0 ${dim ? "opacity-95" : "opacity-75"}`} />
       <div className="grain absolute inset-0 opacity-30" />
     </div>
   );
@@ -126,12 +126,6 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
           }}
         >
           <Material seed={seed} palette={palette} />
-
-          {/* door-hanger ring nod, tinted by deck */}
-          <div
-            className="absolute top-8 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border"
-            style={{ borderColor: accent, opacity: 0.3 }}
-          />
 
           {/* labels */}
           <div className="absolute inset-0 p-7 flex flex-col">
