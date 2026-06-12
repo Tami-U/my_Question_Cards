@@ -165,12 +165,9 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
           <Material seed={seed} palette={palette} dim />
 
           <div className="absolute inset-0 p-8 flex flex-col">
-            <div className="flex items-center justify-between">
+            <div className="flex items-start">
               <span className="font-serif text-[11px] tracking-[0.28em] uppercase text-[#34291f]/55">
                 {category}
-              </span>
-              <span className="font-serif text-[10px] tracking-[0.2em] uppercase" style={{ color: accent }}>
-                N° {num}
               </span>
             </div>
 
@@ -178,10 +175,11 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
               <h2 className="font-serif-kr text-[1.5rem] leading-[1.7] text-[#34291f] break-keep">{question}</h2>
             </div>
 
-            <div className="pt-4 border-t border-[#34291f]/15">
-              <p className="font-serif-kr text-[13px]" style={{ color: accent }}>
-                {hint}
-              </p>
+            <div className="pt-4 border-t border-[#34291f]/15 flex items-baseline gap-2.5">
+              <span className="font-serif text-[12px] tracking-[0.1em] shrink-0" style={{ color: accent }}>
+                N° {num}
+              </span>
+              <span className="font-serif-kr text-[13px] text-[#34291f]/55">{hint}</span>
             </div>
           </div>
         </div>
