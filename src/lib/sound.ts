@@ -363,7 +363,7 @@ class SoundEngine {
 
     if (buf) {
       this.playFileBed(buf);
-      target = 0.5;
+      target = 0.4;
     } else if (a === "fire") {
       this.startBed("lowpass", 440, 0.5, 0.4);
       target = 0.24;
