@@ -104,7 +104,7 @@ export default function Home() {
 
               <h1
                 className="font-jp text-[clamp(7rem,26vh,13rem)] leading-none"
-                style={{ color: "#2E2823", fontWeight: 400 }}
+                style={{ color: "#2E2823", fontWeight: 500 }}
               >
                 間
               </h1>
