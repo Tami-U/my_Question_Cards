@@ -166,9 +166,9 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
     <div className="w-full flex flex-col items-center">
       <div
         className="relative w-full h-[var(--ch)] mx-auto flex items-center justify-center"
-        style={{ ["--ch"]: "min(58svh, calc(100svh - 20rem), calc(86vw * 1.3333))" } as React.CSSProperties}
+        style={{ ["--ch"]: "min(58svh, calc(100svh - 20rem), calc(80vw * 1.3333), 30rem)" } as React.CSSProperties}
       >
-        <AnimatePresence initial={false} custom={direction}>
+        <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={`${order.join("-")}-${currentIndex}`}
             custom={direction}
@@ -252,7 +252,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
       <button
         onClick={handleShuffle}
         disabled={isShuffling}
-        className={`mt-7 font-serif text-xl tracking-[0.32em] uppercase transition-colors disabled:opacity-50 ${
+        className={`mt-7 font-serif text-sm tracking-[0.3em] uppercase transition-colors disabled:opacity-50 ${
           isShuffling ? "text-ink/40" : isB ? "text-ink/80 hover:text-smoke" : "text-ink/80 hover:text-rust"
         }`}
         aria-label="shuffle"
