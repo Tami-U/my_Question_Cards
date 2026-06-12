@@ -93,7 +93,7 @@ export default function Card({ question, category, hint, tapLabel, seed, isBalan
 
   return (
     <div
-      className="relative w-full aspect-[3/4] max-w-sm max-h-[min(58svh,calc(100svh_-_20rem))] mx-auto cursor-pointer [perspective:1500px] outline-none focus-visible:ring-2 focus-visible:ring-ink/30 rounded-[22px]"
+      className="relative h-[var(--ch)] w-[calc(var(--ch)*0.75)] mx-auto cursor-pointer [perspective:1500px] outline-none focus-visible:ring-2 focus-visible:ring-ink/30 rounded-[22px]"
       role="button"
       tabIndex={0}
       aria-label={isFlipped ? "show cover / 앞면 보기" : "flip card / 카드 뒤집기"}

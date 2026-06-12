@@ -59,7 +59,7 @@ export default function Home() {
   const tr = t(lang);
 
   return (
-    <main className="relative min-h-screen flex flex-col bg-[var(--cream)] text-ink overflow-hidden">
+    <main className="relative min-h-[100svh] flex flex-col bg-[var(--cream)] text-ink overflow-hidden">
       <Backdrop deck={deckType} />
 
       {/* context-aware header */}
@@ -102,7 +102,7 @@ export default function Home() {
               </span>
 
               <h1
-                className="font-jp text-[10rem] sm:text-[13rem] leading-none"
+                className="font-jp text-[clamp(7rem,26vh,13rem)] leading-none"
                 style={{ color: "#2E2823", fontWeight: 400 }}
               >
                 間

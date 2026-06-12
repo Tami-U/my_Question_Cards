@@ -99,7 +99,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative flex flex-col items-center justify-center text-center max-w-sm mx-auto py-10"
+        className="relative flex flex-col items-center justify-center text-center max-w-sm mx-auto py-8"
       >
         {/* soft colour bloom on arrival */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-visible" aria-hidden>
@@ -164,12 +164,15 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="relative w-full h-[min(58svh,calc(100svh_-_20rem))] max-w-sm mx-auto flex items-center justify-center">
+      <div
+        className="relative w-full h-[var(--ch)] mx-auto flex items-center justify-center"
+        style={{ ["--ch"]: "min(58svh, calc(100svh - 20rem), calc(86vw * 1.3333))" } as React.CSSProperties}
+      >
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={`${order.join("-")}-${currentIndex}`}
             custom={direction}
-            className="absolute w-full"
+            className="absolute inset-0 flex items-center justify-center"
             initial={{ opacity: 0, x: direction * 180, scale: 0.94 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: direction * -180, scale: 0.94 }}
@@ -203,7 +206,7 @@ export default function CardDeck({ deckType, lang, onBack }: CardDeckProps) {
               {[0, 1, 2, 3, 4].map((i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-full max-w-sm max-h-[min(58svh,calc(100svh_-_20rem))] aspect-[3/4] rounded-[22px] border border-[#d8d3c9] bg-[#efece5] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)] overflow-hidden"
+                  className="absolute inset-0 m-auto h-[var(--ch)] w-[calc(var(--ch)*0.75)] rounded-[22px] border border-[#d8d3c9] bg-[#efece5] shadow-[0_22px_50px_-26px_rgba(40,38,34,0.5)] overflow-hidden"
                   initial={{ x: 0, y: 0, rotate: 0 }}
                   animate={{
                     x: [0, (i - 2) * 58, 0],
